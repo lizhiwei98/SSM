@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzw.Mapper.GoodsCarItemMapper">
+<insert id="insert" parameterType="goodsCarItem">
+    insert into ssm.goodscar(goodsid, username, goodsname, `count`, price, totalPrice)
+    values (#{goodsid},#{username},#{goodsname},#{count},#{price},#{totalPrice})
+</insert>
+
+<delete id="deleteByid" >
+delete from ssm.goodscar where goodsid=#{goodsId} and username=#{username}
+</delete>
+
+<delete id="deleteAll" >
+delete from ssm.goodscar where username=#{username}
+</delete>
+
+    <update id="updateCountBygid" parameterType="map">
+    update ssm.goodscar set
+   `count`=#{count},
+   totalPrice=#{totalPrice}
+    where goodsid=#{goodsId} and username=#{username}
+</update>
+
+    <select id="selectById" resultType="goodsCarItem" parameterType="map">
+        select * from ssm.goodscar where goodsid=#{goodsId} and username=#{username}
+    </select>
+    <select id="getPage" resultType="goodsCarItem" parameterType="map">
+      select * from ssm.goodscar where username=#{username} limit #{start},#{pagesize}
+    </select>
+    <select id="getCount"  resultType="_int">
+      select count(*) from ssm.goodscar
+    </select>
+    <select id="getByname"  resultType="goodsCarItem">
+      select * from ssm.goodscar where username=#{username}
+    </select>
+    <select id="getPageByPrice" resultType="goodsCarItem" parameterType="map">
+      select * from ssm.goodscar where price between #{min} and #{max} order by price limit #{start},#{pagesize}
+    </select>
+
+
+</mapper>

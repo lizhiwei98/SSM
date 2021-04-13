@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzw.Mapper.OrderItemMapper">
+    <insert id="insertAll" parameterType="list">
+    insert into ssm.`orderitem`(goodsid, orderid, goodsname, `count`, price, totalPrice) values
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+            #{item.goodsid},#{item.orderid},#{item.goodsname},#{item.count},#{item.price},#{item.totalPrice}
+        )
+        </foreach>
+    </insert>
+<delete id="deleteByid" >
+delete from ssm.`orderitem` where goodsid=#{goodsId}
+</delete>
+    <update id="updateCountBygid" parameterType="orderItem">
+    update ssm.`orderitem` set
+    username=#{username},
+    `date`=#{date},
+    price=#{price},
+    yes=#{yes}
+    where orderId=#{orderId}
+</update>
+
+    <select id="getByOrderId" resultType="orderItem">
+        select * from ssm.`orderitem` where orderId=#{orderId}
+    </select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzw.Mapper.OrderMapper">
+    <insert id="insert" parameterType="order">
+    insert into ssm.`order`(orderid, username, `date`, price, yes)
+    values (#{orderid},#{username},#{date},#{price},#{yes})
+</insert>
+    <delete id="deleteById" >
+delete from ssm.`order` where orderid=#{orderid}
+</delete>
+    <update id="update" parameterType="order">
+    update ssm.`order` set
+    orderid=#{orderid},
+    username=#{username},
+    `date`=#{date},
+    price=#{price},
+    yes=#{yes}
+    where id=#{id}
+</update>
+    <update id="updateStatus" parameterType="map">
+         update ssm.`order` set
+          yes=#{yes}  where orderid=#{orderid}
+    </update>
+
+    <select id="selectById" resultType="order">
+        select * from ssm.`order` where id=#{id}
+    </select>
+    <select id="getAll" resultType="order">
+      select * from ssm.`order`
+    </select>
+
+    <select id="getPage" resultType="order" parameterType="map">
+      select * from ssm.`order` limit #{start},#{pagesize}
+    </select>
+    <select id="getByname"  resultType="order">
+      select * from ssm.`order` where username=#{username}
+    </select>
+    <select id="getPageByPrice" resultType="order" parameterType="map">
+      select * from ssm.`order` where price between #{min} and #{max} order by price limit #{start},#{pagesize}
+    </select>
+
+</mapper>

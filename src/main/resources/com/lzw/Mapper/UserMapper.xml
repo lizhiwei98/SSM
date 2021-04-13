@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzw.Mapper.UserMapper">
+<insert id="insert" parameterType="user">
+    insert into ssm.user(username, password, email)
+    values (#{username},#{password},#{email})
+</insert>
+<delete id="deleteById" >
+delete from ssm.user where id=#{id}
+</delete>
+<update id="update" parameterType="user">
+    update ssm.user set
+    username=#{username},
+    password=#{password},
+    email=#{email} where id=#{id}
+</update>
+
+    <select id="selectById" resultType="user">
+        select * from ssm.user where id=#{id}
+    </select>
+    <select id="login" resultType="user">
+        select * from ssm.user where username=#{username} and password=#{password}
+    </select>
+    <select id="existuser" resultType="user">
+      select * from ssm.user where username=#{username}
+    </select>
+    <select id="selectAll" resultType="user">
+      select * from ssm.user
+    </select>
+</mapper>
